@@ -1,0 +1,86 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<LanchesMac.Models.Pedido>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Pedidos</h1>
+
+<form method="get" class="form-inline">
+    <input name="filter" class="form-control" placeholder="filter"
+           value="@Model.RouteValue["Filter"]" />
+    <button type="submit" class="btn btn-info">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+    </button>
+</form>
+
+Total de Pedido : @Model.TotalRecordCount
+
+<div>
+    <vc:pager paging-list="@Model"></vc:pager>
+</div>
+
+<p>
+    <a asp-action="Create">Novo Pedido</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PedidoEnviado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sobrenome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco1) , @Html.DisplayNameFor(model => model.Endereco2), @Html.DisplayNameFor(model => model.Cep), @Html.DisplayNameFor(model => model.Cidade)
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>           
+            <th>
+                @Html.DisplayNameFor(model => model.PedidoEntregueEm)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PedidoEnviado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sobrenome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco1), @Html.DisplayFor(modeltem => item.Endereco2), @Html.DisplayFor(modelItem => item.Cep), @Html.DisplayFor(modelItem => item.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PedidoEntregueEm)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PedidoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PedidoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PedidoId">Delete</a> |
+                <a asp-action="PedidoLanches" asp-route-id="@item.PedidoId">Itens</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
